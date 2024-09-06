@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form, div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"], select, button {
+    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+input[disabled] {
+    width: 100%;
+    min-width: 50vw;
+    background-color: #eee;
+    border: 2px solid #ddd;
+    cursor: not-allowed;
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    form, div {
+        width: 100%;
+    }
+
+    input[type="text"], select, button {
+        width: 80vw;
+    }
+
+    button {
+        padding: 10px;
+        width: 100%;
+    }
+}
+
+/* Para pantallas grandes */
+@media (min-width: 601px) {
+    
+    
+    form, div {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    label {
+        margin-right: 10px;
+    }
+
+    /* input[type="text"] {
+        width: 200px;
+        margin-right: 10px;
+    } */
+
+    select {
+        width: 150px;
+    }
+
+    button {
+        width: auto;
+    }
+}

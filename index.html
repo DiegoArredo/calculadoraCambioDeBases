@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Calculadora de cambios de base</h1>
+    <form>
+        <div>
+            <label for="Valor">Valor a transformar</label>
+            <input type="text" name="Valor" id="Valor" autocomplete="off" autofocus required>
+            <select name="base" id="baseSelect">
+                <option value="2">Binario</option>
+                <option value="8">Octal</option>
+                <option value="10">Decimal</option>
+                <option value="16">Hexadecimal</option>
+            </select>
+            <button type="submit">Go</button>
+        </div>
+    </form>
+    <div>
+        <label for="hexadecimalInput">Hexadecimal</label>
+        <input name="Hexadecimal" type="text" id="hexadecimalInput" disabled>
+    </div>
+    <div>
+        <label for="decimalInput">Decimal</label>
+        <input name="Decimal" type="text" id="decimalInput" disabled>
+    </div>
+    <div>
+        <label for="octalInput">Octal</label>
+        <input name="Octal" type="text" id="octalInput" disabled>
+    </div>
+    <div>
+        <label for="binarioInput">Binario</label>
+        <input name="Binario" type="text" id="binarioInput" disabled>
+    </div>
+
+</body>
+<script>
+    const form = document.querySelector('form');
+    const baseSelect = document.querySelector('#baseSelect');
+    const valorInput = document.querySelector('#Valor');
+    const hexadecimalInput = document.querySelector('#hexadecimalInput');
+    const decimalInput = document.querySelector('#decimalInput');
+    const octalInput = document.querySelector('#octalInput');
+    const binarioInput = document.querySelector('#binarioInput');
+
+    form.addEventListener('submit', (e) => {
+        let regex;
+        const valor = valorInput.value;
+        const base = baseSelect.value;
+
+        // Definir la expresión regular según la base seleccionada
+        switch (base) {
+            case '2': // Binario
+                regex = /^[01]+(\.[01]+)?$/;
+                break;
+            case '8': // Octal
+                regex = /^[0-7]+(\.[0-7]+)?$/;
+                break;
+            case '10': // Decimal
+                regex = /^[0-9]+(\.[0-9]+)?$/;
+                break;
+            case '16': // Hexadecimal
+                regex = /^[0-9A-Fa-f]+(\.[0-9A-Fa-f]+)?$/;
+                break;
+            default:
+                regex = /.*/; // Cualquier cosa en caso de error
+        }
+        if (!regex.test(valor)) {
+            event.preventDefault(); // Evitar que el formulario se envíe
+            decimalInput.value = "";      
+            hexadecimalInput.value = ""
+            octalInput.value = ""
+            binarioInput.value = ""
+            alert('El valor ingresado no es válido para la base seleccionada');
+        }else{
+
+        e.preventDefault();
+        let decimal = toDecimalfromAll(valor, base);
+        decimalInput.value = decimal;      
+        hexadecimalInput.value = fromDecimalTo(decimal.toString(), 16);
+        octalInput.value = fromDecimalTo(decimal.toString(), 8);
+        binarioInput.value = fromDecimalTo(decimal.toString(), 2);
+        }
+    });
+</script>
+
+</html>
